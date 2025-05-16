@@ -4,31 +4,15 @@ services:
     container_name: kk-solar-mongodb
     restart: unless-stopped
     environment:
-      - MONGO_INITDB_ROOT_USERNAME=${MONGODB_ADMIN_USER:-admin}
-      - MONGO_INITDB_ROOT_PASSWORD=${MONGODB_ADMIN_PASSWORD:-password}
-      - MONGO_INITDB_DATABASE=${MONGODB_DB_NAME:-solarsystem}
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_USERNAME:-admin}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASSWORD:-password}
+      - MONGO_INITDB_DATABASE=solarsystem
     ports:
-      - "${MONGODB_PORT:-27017}:27017"
+      - "27017:27017"
     volumes:
       - mongodb_data:/data/db
     networks:
       - kk-solar-network
-
-  # Add application service if needed
-  # app:
-  #   build: .
-  #   container_name: kk-solar-app
-  #   restart: unless-stopped
-  #   environment:
-  #     - PORT=${PORT:-3000}
-  #     - NODE_ENV=${NODE_ENV:-development}
-  #     - MONGODB_URI=mongodb://${MONGODB_USER}:${MONGODB_PASSWORD}@mongodb:27017/${MONGODB_DB_NAME}
-  #   ports:
-  #     - "${PORT:-3000}:3000"
-  #   depends_on:
-  #     - mongodb
-  #   networks:
-  #     - kk-solar-network
 
 networks:
   kk-solar-network:
